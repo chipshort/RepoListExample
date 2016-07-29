@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+	<serviceLocator id="githubLocator" type="hex.config.stateful.ServiceLocator">
+		<item>
+			<key type="Class" value="example.module.git.service.IGitService" />
+			<value type="Class" value="example.github.service.GithubService" />
+		</item>
+	</serviceLocator>
+</root>

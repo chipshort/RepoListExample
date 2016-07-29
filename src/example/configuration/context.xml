@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root name="githubContext">
+	<include file="example/configuration/service.xml" />
+	<include file="example/configuration/module.xml" />
+</root>

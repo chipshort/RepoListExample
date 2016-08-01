@@ -12,7 +12,7 @@ import hex.service.stateless.http.HTTPServiceConfiguration;
  */
 class GithubService extends HTTPService implements IGitService
 {
-	@gitUrl("user")
+	@gitUser("user")
 	var user : String;
 
 	public function new ()

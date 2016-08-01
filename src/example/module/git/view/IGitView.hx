@@ -11,4 +11,5 @@ interface IGitView extends IView
 {
 	var onLoadClick : MonoTypeClosureDispatcher<BasicEvent>;
 	function setRepos (repos : Array<GitRepo>) : Void;
+	function getUser () : String;
 }

@@ -20,23 +20,22 @@ import hex.module.dependency.RuntimeDependencies;
  */
 class GitModule extends Module
 {
-
-	@Inject
-	var view : GitViewHelper;
+	@Inject var view : GitViewHelper; //<-- Does not work
 	
 	public function new (config : IStatefulConfig) 
 	{
 		super ();
 		
-		//this._annotationProvider.registerMetaData ("gitUrl", this, 
+		this._annotationProvider.registerMetaData ("gitUser", this, getUser);
 		
 		this._addStatefulConfigs ([config]);
 		this._addStatelessConfigClasses ([GitModelConfig, GitCommandConfig]);
+		
+		buildView ();
 	}
 	
 	override function _onInitialisation () : Void 
 	{
-		buildView ();
 	}
 	
 	override function _getRuntimeDependencies () : IRuntimeDependencies 
@@ -47,10 +46,13 @@ class GitModule extends Module
 		return dep;
 	}
 	
+	function getUser (v : String) : String
+	{
+		return this.view.getUser ();
+	}
+	
 	function buildView () : Void
 	{
-		var viewHelper = new GitViewHelper ();
-		
 		#if js
 		var container = js.Browser.document.querySelector (".list");
 		this.buildViewHelper (GitViewHelper, new example.module.git.view.GitViewJS (container));

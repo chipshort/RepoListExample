@@ -7,6 +7,7 @@ import hex.event.MonoTypeClosureDispatcher;
 import hex.view.BasicView;
 import js.Browser;
 import js.html.DOMElement;
+import js.html.InputElement;
 import js.html.UListElement;
 
 /**
@@ -19,6 +20,7 @@ class GitViewJS extends BasicView implements IGitView
 	
 	var container : DOMElement;
 	var repoList : UListElement;
+	var text : InputElement;
 	
 	public function new (element : DOMElement)
 	{
@@ -51,9 +53,14 @@ class GitViewJS extends BasicView implements IGitView
 		container.appendChild (list);
 	}
 	
+	public function getUser () : String
+	{
+		return text.value;
+	}
+	
 	inline function createButton () : Void
 	{
-		var text = Browser.document.createInputElement ();
+		text = Browser.document.createInputElement ();
 		text.type = "text";
 		text.value = "chipshort";
 		container.appendChild (text);

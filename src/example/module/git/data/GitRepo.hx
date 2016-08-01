@@ -12,7 +12,6 @@ class GitRepo
 	public function new (url : String, name : String)
 	{
 		this.url = url;
-		trace (name);
 		this.name = name;
 	}
 	

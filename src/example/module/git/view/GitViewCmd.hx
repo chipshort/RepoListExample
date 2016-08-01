@@ -8,6 +8,7 @@ import hex.view.BasicView;
  */
 class GitViewCmd extends BasicView implements IGitView
 {
+	public var onLoadClick : MonoTypeClosureDispatcher<BasicEvent>;
 
 	public function new() 
 	{

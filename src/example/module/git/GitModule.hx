@@ -21,16 +21,22 @@ import hex.module.dependency.RuntimeDependencies;
 class GitModule extends Module
 {
 
-	public function new(config : IStatefulConfig) 
+	@Inject
+	var view : GitViewHelper;
+	
+	public function new (config : IStatefulConfig) 
 	{
-		super();
+		super ();
+		
+		//this._annotationProvider.registerMetaData ("gitUrl", this, 
 		
 		this._addStatefulConfigs ([config]);
 		this._addStatelessConfigClasses ([GitModelConfig, GitCommandConfig]);
-		
+	}
+	
+	override function _onInitialisation () : Void 
+	{
 		buildView ();
-		
-		this._dispatchPrivateMessage (GitModuleMessage.LOAD_REPOS);
 	}
 	
 	override function _getRuntimeDependencies () : IRuntimeDependencies 

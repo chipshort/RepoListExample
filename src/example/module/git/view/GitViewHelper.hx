@@ -1,9 +1,10 @@
 package example.module.git.view;
 
 import example.module.git.data.GitRepo;
-import example.module.git.model.GitModel;
+import example.module.git.message.GitModuleMessage;
 import example.module.git.model.IGitModelListener;
 import example.module.git.model.IGitModelRO;
+import hex.event.BasicEvent;
 import hex.view.viewhelper.ViewHelper;
 
 /**
@@ -22,11 +23,17 @@ class GitViewHelper extends ViewHelper<IGitView> implements IGitModelListener
 	override function _initialize():Void 
 	{
 		model.addListener (this);
+		this._view.onLoadClick.addEventListener (onClick);
 	}
 	
 	public function onReposLoaded (repos : Array<GitRepo>) : Void
 	{
 		this._view.setRepos (repos);
+	}
+	
+	function onClick (e : BasicEvent) : Void
+	{
+		this.dispatcher.dispatch (GitModuleMessage.LOAD_REPOS);
 	}
 	
 }

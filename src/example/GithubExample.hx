@@ -11,6 +11,17 @@ class GithubExample
 	
 	public static function main () : Void
 	{
+		#if debug
+		var proxy = new hex.log.layout.LogProxyLayout();
+		#if js
+		var controller = new hex.log.layout.LogLayoutHTMLView( proxy );
+		proxy.addListener( new hex.log.layout.SimpleBrowserLayout( controller.consoleWrapperTaget ) );
+		proxy.addListener( new hex.log.layout.JavaScriptConsoleLayout() );
+		#elseif flash
+		proxy.addListener( new hex.log.layout.TraceLayout() );
+		#end
+		#end
+		
 		new GithubExample ();
 	}
 

@@ -15,7 +15,7 @@ class LoadRepoCommand extends BasicCommand implements IAsyncStatelessServiceList
 {
 	@Inject var gitService : IGitService;
 	@Inject var gitModel : IGitModel;
-
+	
 	public function new ()
 	{
 		super ();

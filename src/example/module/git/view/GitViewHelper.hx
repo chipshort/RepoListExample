@@ -31,14 +31,13 @@ class GitViewHelper extends ViewHelper<IGitView> implements IGitModelListener
 		this._view.setRepos (repos);
 	}
 	
-	public function getUser () : String
+	public function getUser (s : String) : String
 	{
 		return this._view.getUser ();
 	}
 	
 	function onClick (e : BasicEvent) : Void
 	{
-		this._view.getUser ();
 		this.dispatcher.dispatch (GitModuleMessage.LOAD_REPOS);
 	}
 	

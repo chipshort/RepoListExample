@@ -1,27 +1,29 @@
-package example.github.service;
-
+package example.bitbucket.service;
 import example.module.git.data.GitRepo;
 import haxe.Json;
-import hex.data.ServiceParser;
 
 /**
  * ...
  * @author Christoph Otter
  */
-class GithubParser
+class BitbucketParser
 {
+
 	public function new ()
 	{
+		
 	}
 	
 	public function parse (serializedContent : Dynamic) : Array<GitRepo>
 	{
 		try {
-			var data : Array<Dynamic> = Json.parse (serializedContent);
+			var data : Dynamic = Json.parse (serializedContent);
+			var array : Array<Dynamic> = data.values;
+			
 			var repos = new Array<GitRepo> ();
 			
-			for (repo in data) {
-				repos.push (new GitRepo (repo.html_url, repo.name));
+			for (r in array) {
+				repos.push (new GitRepo (r.links.html.href, r.name));
 			}
 			
 			return repos;

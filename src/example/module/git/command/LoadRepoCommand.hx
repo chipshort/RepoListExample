@@ -25,6 +25,9 @@ class LoadRepoCommand extends BasicCommand implements IAsyncStatelessServiceList
 	{
 		gitService.addListener (this);
 		gitService.call ();
+		#if debug
+		getLogger ().debug (gitService + " running");
+		#end
 	}
 	
 	public function onServiceComplete (service : IAsyncStatelessService) : Void
@@ -37,6 +40,7 @@ class LoadRepoCommand extends BasicCommand implements IAsyncStatelessServiceList
 		#if debug
 		getLogger ().debug (service + " failed");
 		#end
+		gitModel.setRepos (null);
 	}
 	
 	public function onServiceCancel (service : IAsyncStatelessService) : Void

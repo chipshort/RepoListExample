@@ -8,6 +8,8 @@ import hex.view.BasicView;
 import js.Browser;
 import js.html.DOMElement;
 import js.html.InputElement;
+import js.html.KeyEvent;
+import js.html.KeyboardEvent;
 import js.html.UListElement;
 
 /**
@@ -35,9 +37,15 @@ class GitViewJS extends BasicView implements IGitView
 	
 	public function setRepos (repos : Array<GitRepo>) : Void
 	{
-		container.innerHTML = "";
+		if (repoList != null) {
+			container.removeChild (repoList);
+		}
+			
+		if (repos == null) {
+			return;
+		}
 		
-		var list = Browser.document.createUListElement ();
+		repoList = Browser.document.createUListElement ();
 		
 		for (repo in repos) {
 			var li = Browser.document.createLIElement ();
@@ -47,10 +55,10 @@ class GitViewJS extends BasicView implements IGitView
 			a.innerText = repo.name;
 			li.appendChild (a);
 			
-			list.appendChild (li);
+			repoList.appendChild (li);
 		}
 		
-		container.appendChild (list);
+		container.appendChild (repoList);
 	}
 	
 	public function getUser () : String
@@ -60,15 +68,24 @@ class GitViewJS extends BasicView implements IGitView
 	
 	inline function createButton () : Void
 	{
+		var controls = Browser.document.createDivElement ();
 		text = Browser.document.createInputElement ();
 		text.type = "text";
+		text.onkeypress = function (e : KeyboardEvent) {
+			if (e.keyCode == KeyboardEvent.DOM_VK_RETURN) {
+				onPressed ();
+			}
+		}
 		text.value = "chipshort";
-		container.appendChild (text);
+		controls.appendChild (text);
 		
 		var btn = Browser.document.createButtonElement ();
 		btn.innerText = "Load Repos";
 		btn.onclick = onPressed;
-		container.appendChild (btn);
+		controls.appendChild (btn);
+		
+		container.appendChild (controls);
+		container.appendChild (Browser.document.createBRElement ());
 	}
 	
 	function onPressed ()

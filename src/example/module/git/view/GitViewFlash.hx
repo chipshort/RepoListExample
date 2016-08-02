@@ -47,6 +47,11 @@ class GitViewFlash extends BasicView implements IGitView
 		
 	}
 	
+	public function getUser () : String
+	{
+		return "DoclerLabs";
+	}
+	
 	inline function createMessage () : Void
 	{
 		var text = new flash.text.TextField ();

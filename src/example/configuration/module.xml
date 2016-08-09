@@ -2,6 +2,6 @@
 <root>
 	<module id="gitRepoList" type="example.module.git.GitModule">
 		<argument ref="gitLocator" /> <!-- githubLocator is located in service.xml -->
+		<argument ref="settings" />
 	</module>
-
 </root>

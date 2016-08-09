@@ -10,6 +10,9 @@ import hex.view.IView;
 interface IGitView extends IView
 {
 	var onLoadClick : MonoTypeClosureDispatcher<BasicEvent>;
+	
+	function initialize () : Void;
 	function setRepos (repos : Array<GitRepo>) : Void;
+	function setUser (user : String) : Void;
 	function getUser () : String;
 }

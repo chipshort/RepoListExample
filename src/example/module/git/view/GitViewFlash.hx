@@ -24,9 +24,11 @@ class GitViewFlash extends BasicView implements IGitView
 		super ();
 		
 		onLoadClick = new MonoTypeClosureDispatcher<BasicEvent> (GitViewEvent.LoadClicked, this);
-		
 		container = element;
-		
+	}
+	
+	public function initialize () : Void
+	{
 		createMessage ();
 	}
 	
@@ -45,6 +47,11 @@ class GitViewFlash extends BasicView implements IGitView
 		
 		container.addChild (repoList);
 		
+	}
+	
+	public function setUser (user : String) : Void
+	{
+		//TODO: finish
 	}
 	
 	public function getUser () : String

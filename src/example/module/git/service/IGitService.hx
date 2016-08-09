@@ -9,4 +9,5 @@ import hex.service.stateless.IAsyncStatelessService;
 interface IGitService extends IAsyncStatelessService
 {
 	function getRepos () : Array<GitRepo>;
+	function setUser (user : String) : Void;
 }

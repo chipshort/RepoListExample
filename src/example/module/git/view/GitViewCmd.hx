@@ -18,7 +18,10 @@ class GitViewCmd extends BasicView implements IGitView
 	{
 		super ();
 		onLoadClick = new MonoTypeClosureDispatcher<BasicEvent> (GitViewEvent.LoadClicked, this);
-		
+	}
+	
+	public function initialize () : Void
+	{
 		askUser ();
 	}
 	
@@ -27,8 +30,17 @@ class GitViewCmd extends BasicView implements IGitView
 		return user;
 	}
 	
+	public function setUser (user : String) : Void
+	{
+		this.user = user;
+	}
+	
 	public function setRepos (repos : Array<GitRepo>) : Void
 	{
+		if (repos == null) {
+			return;
+		}
+		
 		for (repo in repos) {
 			Sys.println (repo.name + " : " + repo.url);
 		}
@@ -39,9 +51,14 @@ class GitViewCmd extends BasicView implements IGitView
 	inline function askUser () : Void
 	{
 		Sys.print ("Please enter user name: ");
-		user = Sys.stdin ().readLine ();
+		var inp = Sys.stdin ().readLine ();
+		if (inp == "") {
+			inp = user;
+		}
 		
-		onLoadClick.dispatchEvent (); //no listeners yet :(
+		user = inp;
+		
+		onLoadClick.dispatchEvent ();
 	}
 	
 }

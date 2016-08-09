@@ -2,7 +2,6 @@ package example.github.service;
 
 import example.module.git.data.GitRepo;
 import example.module.git.service.IGitService;
-import hex.log.Logger;
 import hex.service.stateless.http.HTTPService;
 import hex.service.stateless.http.HTTPServiceConfiguration;
 
@@ -12,9 +11,6 @@ import hex.service.stateless.http.HTTPServiceConfiguration;
  */
 class GithubService extends HTTPService implements IGitService
 {
-	@gitUser("user")
-	var user : String;
-
 	public function new ()
 	{
 		super ();
@@ -23,13 +19,18 @@ class GithubService extends HTTPService implements IGitService
 	@PostConstruct
 	override public function createConfiguration () : Void
 	{
-		this.setConfiguration (new HTTPServiceConfiguration ("https://api.github.com/users/" + user + "/repos"));
+		this.setConfiguration (new HTTPServiceConfiguration ());
 		this.setParser (new GithubParser ());
 	}
 	
 	public function getRepos () : Array<GitRepo> 
 	{
 		return this.getResult ();
+	}
+	
+	public function setUser (user : String) : Void
+	{
+		this.setURL ("https://api.github.com/users/" + user + "/repos");
 	}
 	
 }

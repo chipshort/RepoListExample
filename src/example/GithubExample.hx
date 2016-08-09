@@ -1,6 +1,7 @@
 package example;
 import example.github.service.GithubParser;
 import hex.compiler.parser.xml.XmlCompiler;
+import hex.unittest.notifier.WebSocketNotifier;
 
 /**
  * ...
@@ -23,7 +24,6 @@ class GithubExample
 		#elseif sys
 		proxy.addListener (new hex.log.layout.TraceLayout ());
 		#end
-		
 		#end
 		
 		new GithubExample ();

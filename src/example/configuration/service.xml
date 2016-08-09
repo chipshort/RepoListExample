@@ -3,8 +3,8 @@
 	<serviceLocator id="gitLocator" type="hex.config.stateful.ServiceLocator">
 		<item>
 			<key type="Class" value="example.module.git.service.IGitService" />
-			<value type="Class" value="example.github.service.GithubService" />
-			<!--<value type="Class" value="example.bitbucket.service.BitbucketService" />-->
+			<!--<value type="Class" value="example.github.service.GithubService" />-->
+			<value type="Class" value="example.bitbucket.service.BitbucketService" />
 		</item>
 	</serviceLocator>
 </root>

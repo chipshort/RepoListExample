@@ -7,6 +7,7 @@ import hex.event.MonoTypeClosureDispatcher;
 import hex.view.BasicView;
 import js.Browser;
 import js.html.DOMElement;
+import js.html.DivElement;
 import js.html.InputElement;
 import js.html.KeyEvent;
 import js.html.KeyboardEvent;
@@ -21,6 +22,8 @@ class GitViewJS extends BasicView implements IGitView
 	public var onLoadClick : MonoTypeClosureDispatcher<BasicEvent>;
 	
 	var container : DOMElement;
+	
+	var controls : DivElement;
 	var repoList : UListElement;
 	var text : InputElement;
 	
@@ -29,10 +32,15 @@ class GitViewJS extends BasicView implements IGitView
 		super ();
 		
 		onLoadClick = new MonoTypeClosureDispatcher<BasicEvent> (GitViewEvent.LoadClicked, this);
-		
 		container = element;
 		
-		createButton ();
+		createUI ();
+	}
+	
+	public function initialize () : Void
+	{
+		container.appendChild (controls);
+		container.appendChild (Browser.document.createBRElement ());
 	}
 	
 	public function setRepos (repos : Array<GitRepo>) : Void
@@ -40,7 +48,7 @@ class GitViewJS extends BasicView implements IGitView
 		if (repoList != null) {
 			container.removeChild (repoList);
 		}
-			
+		
 		if (repos == null) {
 			return;
 		}
@@ -61,14 +69,19 @@ class GitViewJS extends BasicView implements IGitView
 		container.appendChild (repoList);
 	}
 	
+	public function setUser (user : String) : Void
+	{
+		text.value = user;
+	}
+	
 	public function getUser () : String
 	{
 		return text.value;
 	}
 	
-	inline function createButton () : Void
+	inline function createUI () : Void
 	{
-		var controls = Browser.document.createDivElement ();
+		controls = Browser.document.createDivElement ();
 		text = Browser.document.createInputElement ();
 		text.type = "text";
 		text.onkeypress = function (e : KeyboardEvent) {
@@ -83,9 +96,6 @@ class GitViewJS extends BasicView implements IGitView
 		btn.innerText = "Load Repos";
 		btn.onclick = onPressed;
 		controls.appendChild (btn);
-		
-		container.appendChild (controls);
-		container.appendChild (Browser.document.createBRElement ());
 	}
 	
 	function onPressed ()

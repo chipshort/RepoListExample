@@ -11,24 +11,26 @@ import hex.service.stateless.http.HTTPServiceConfiguration;
  */
 class BitbucketService extends HTTPService implements IGitService
 {
-	@gitUser("user")
-	var user : String;
-
-	public function new() 
+	public function new ()
 	{
-		super();
+		super ();
 	}
 	
 	@PostConstruct
-	override public function createConfiguration():Void 
+	override public function createConfiguration () : Void 
 	{
-		this.setConfiguration (new HTTPServiceConfiguration ("https://api.bitbucket.org/2.0/repositories/" + user));
+		this.setConfiguration (new HTTPServiceConfiguration ());
 		this.setParser (new BitbucketParser ());
 	}
-		
-	public function getRepos():Array<GitRepo> 
+	
+	public function getRepos () : Array<GitRepo> 
 	{
 		return this.getResult ();
+	}
+	
+	public function setUser (user : String) : Void
+	{
+		this.setURL ("https://api.bitbucket.org/2.0/repositories/" + user);
 	}
 	
 }

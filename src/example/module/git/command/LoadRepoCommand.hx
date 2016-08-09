@@ -1,4 +1,5 @@
 package example.module.git.command;
+import example.module.git.data.UserSetting;
 import example.module.git.model.IGitModel;
 import example.module.git.service.IGitService;
 import hex.control.Request;
@@ -23,11 +24,12 @@ class LoadRepoCommand extends BasicCommand implements IAsyncStatelessServiceList
 	
 	public function execute (?request : Request):Void 
 	{
+		var payload = request.getExecutionPayloads ();
+		var user : String = payload[0].getData ();
+		
+		gitService.setUser (user);
 		gitService.addListener (this);
 		gitService.call ();
-		#if debug
-		getLogger ().debug (gitService + " running");
-		#end
 	}
 	
 	public function onServiceComplete (service : IAsyncStatelessService) : Void
@@ -37,6 +39,7 @@ class LoadRepoCommand extends BasicCommand implements IAsyncStatelessServiceList
 	
 	public function onServiceFail (service : IAsyncStatelessService) : Void
 	{
+		service.getConfiguration ();
 		#if debug
 		getLogger ().debug (service + " failed");
 		#end

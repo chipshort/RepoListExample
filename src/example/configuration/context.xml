@@ -2,4 +2,5 @@
 <root name="githubContext">
 	<include file="example/configuration/service.xml" />
 	<include file="example/configuration/module.xml" />
+	<include file="example/configuration/settings.xml" />
 </root>

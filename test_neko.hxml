@@ -17,21 +17,8 @@
 -cp ../hexMachina/hexState/test
 -cp ../hexMachina/hexUnit/src
 -cp ../hexMachina/hexUnit/test
--main example.GithubExample
-#-main NekoTest
+-cp ../hexMachina/hexMachina/test
 
---each
--neko bin/main.n
--debug
-
-#--next
-#-cs bin/cs
-#-debug
-
---next
--js bin/Main.js
-
---next
--swf-version 10.1
--swf bin/index.swf
+-main MainMachinaTest
+-neko bin/test.n
 -debug

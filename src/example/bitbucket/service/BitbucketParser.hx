@@ -14,7 +14,7 @@ class BitbucketParser
 		
 	}
 	
-	public function parse (serializedContent : Dynamic) : Array<GitRepo>
+	public function parse (serializedContent : Dynamic ) : Array<GitRepo>
 	{
 		try {
 			var data : Dynamic = Json.parse (serializedContent);

@@ -27,7 +27,7 @@ class GitViewHelper extends ViewHelper<IGitView> implements IGitModelListener
 	override function _initialize() : Void 
 	{
 		model.addListener (this);
-		this._view.onLoadClick.addEventListener (onClick);
+		this._view.onLoadClick.addEventListener (loadRepos);
 		this._view.setUser (userSettings.defaultName);
 		this._view.initialize ();
 	}
@@ -37,7 +37,7 @@ class GitViewHelper extends ViewHelper<IGitView> implements IGitModelListener
 		this._view.setRepos (repos);
 	}
 	
-	function onClick (e : BasicEvent) : Void
+	function loadRepos (e : BasicEvent) : Void
 	{
 		var request = new Request ([new ExecutionPayload (this._view.getUser (), String)]);
 		this.dispatcher.dispatch (GitModuleMessage.LOAD_REPOS, [request]);

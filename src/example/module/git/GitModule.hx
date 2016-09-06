@@ -9,9 +9,13 @@ import example.module.git.view.GitViewHelper;
 import hex.config.stateful.IStatefulConfig;
 import hex.config.stateless.StatelessCommandConfig;
 import hex.config.stateless.StatelessModelConfig;
+import hex.event.MessageType;
 import hex.module.Module;
 import hex.module.dependency.IRuntimeDependencies;
 import hex.module.dependency.RuntimeDependencies;
+import hex.state.State;
+import hex.state.StateMachine;
+import hex.state.control.StateController;
 
 /**
  * ...
@@ -43,8 +47,6 @@ class GitModule extends Module
 	
 	function buildView () : Void
 	{
-		//this._getDependencyInjector ().mapToValue (GitUser, new GitUser ("test"));
-		
 		#if js
 		var container = js.Browser.document.querySelector (".list");
 		this.buildViewHelper (GitViewHelper, new example.module.git.view.GitViewJS (container));
@@ -53,12 +55,9 @@ class GitModule extends Module
 		this.buildViewHelper (GitViewHelper, new example.module.git.view.GitViewFlash (container));
 		flash.Lib.current.addChild (container);
 		#elseif (cpp || neko || cs || java)
+		//currently only neko tested
 		this.buildViewHelper (GitViewHelper, new example.module.git.view.GitViewCmd ());
 		#end
-		
-		//this._getDependencyInjector ().mapToType (IGitUser, GitUser);
-		//this._getDependencyInjector().mapToValue( IUserSettings, new 
-		//this._annotationProvider.registerMetaData ("gitUser", viewHelper, viewHelper.getUser);
 	}
 	
 }
@@ -67,7 +66,7 @@ class GitModelConfig extends StatelessModelConfig
 {
 	override public function configure () : Void 
 	{
-		this.map (IGitModel, GitModel);
+		this.mapModel (IGitModel, GitModel);
 	}
 }
 

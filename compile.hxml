@@ -1,32 +1,11 @@
--cp ../hexMachina/hexMachina-Gallery-Classical-MVC/src
 -cp src
--cp ../hexMachina/hexInject/src
--cp ../hexMachina/hexCore/src
--cp ../hexMachina/hexAnnotation/src
--cp ../hexMachina/hexIoC/src
--cp ../hexMachina/hexMVC/src
--cp ../hexMachina/hexService/src
--cp ../hexMachina/hexState/src
--cp ../hexMachina/hexAnnotation/test
--cp ../hexMachina/hexCore/test
--cp ../hexMachina/hexInject/test
--cp ../hexMachina/hexIoC/test
--cp ../hexMachina/hexMDVTC/test
--cp ../hexMachina/hexMVC/test
--cp ../hexMachina/hexService/test
--cp ../hexMachina/hexState/test
--cp ../hexMachina/hexUnit/src
--cp ../hexMachina/hexUnit/test
+-lib hexmachina
 -main example.GithubExample
-#-main NekoTest
 
 --each
+
 -neko bin/main.n
 -debug
-
-#--next
-#-cs bin/cs
-#-debug
 
 --next
 -js bin/Main.js

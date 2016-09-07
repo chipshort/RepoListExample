@@ -13,7 +13,7 @@ import hex.util.MacroUtil;
  * ...
  * @author Christoph Otter
  */
-class GithubExample
+class RepoExample
 {
 	
 	public static function main () : Void
@@ -31,31 +31,14 @@ class GithubExample
 		#end
 		#end
 		
-		new GithubExample ();
+		new RepoExample ();
 	}
 
 	public function new ()
 	{
 		XmlCompiler.readXmlFile ("example/configuration/context.xml", null, [
-			"github" => true, "bitbucket" => false
+			"github" => false, "bitbucket" => true
 		]);
 	}
 	
-}
-
-interface ITestListener {
-	function onTest() : Void;
-}
-
-class TestListener implements ITestListener {
-	public function new() {
-	}
-	
-	public function onTest() : Void {
-		trace( "helloooooo" );
-	}
-	
-	public function handleMessage( messageType : MessageType, s : String, i : Int ) : Void {
-		trace( messageType );
-	}
 }

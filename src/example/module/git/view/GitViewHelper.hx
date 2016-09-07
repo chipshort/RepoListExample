@@ -24,7 +24,7 @@ class GitViewHelper extends ViewHelper<IGitView> implements IGitModelListener
 		super ();
 	}
 	
-	override function _initialize() : Void 
+	override function _initialize () : Void 
 	{
 		model.addListener (this);
 		this._view.onLoadClick.addEventListener (loadRepos);

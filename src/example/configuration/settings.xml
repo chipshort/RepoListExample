@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <root>
+	<user id="defaultUser" value="DoclerLabs" if="github" />
+	<user id="defaultUser" value="rude" if="bitbucket" />
+	
 	<config id="settings" type="hex.ioc.di.MappingConfiguration">
-		<item> <key type="Class" value="example.module.git.data.UserSetting"/> <value ref="gitUser" /></item>
+		<item>
+			<key type="Class" value="example.module.git.data.UserSetting"/>
+			<value ref="gitUser" />
+		</item>
 	</config>
 	
 	<user id="gitUser" type="example.module.git.data.UserSetting">
-		<argument value="DoclerLabs" />
+		<argument ref="defaultUser" />
 	</user>
 </root>
